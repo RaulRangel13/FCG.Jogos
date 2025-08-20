@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Minha API",
-        Version = "v1"
+        Version = "v1" 
     });
     // Outras configurações do Swagger
 });
