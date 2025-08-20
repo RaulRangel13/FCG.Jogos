@@ -1,6 +1,9 @@
 ﻿using Infra.Catalogos;
-using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Domain.Catalogos.Services;
+using Infra.Catalogos.Queries;
+using Infra.Catalogos.Commands;
 
 namespace AdminBFF._Core
 {
@@ -8,24 +11,24 @@ namespace AdminBFF._Core
     {
         public static void AddContext(this IServiceCollection services, ConfigurationManager config)
         {
-
-            //Contexts (separar em outro arquivo)
+            //Conexão com o banco de dados
             var connectionString = config.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<CatalogoDBContext>(options => {
+            // Registrar a conexão do Dapper como singleton
+            services.AddSingleton<CatalogoDBConnection>(provider => new CatalogoDBConnection(connectionString));
 
-                options.UseNpgsql(connectionString,
-                    b => {
-                        b.MigrationsAssembly(typeof(CatalogoDBContext).Assembly.FullName);
-                        //b.MinPoolSize(1);
-                        //b.MaxPoolSize(20);
-                        //b.ConnectionIdleLifetime(300); // 5 minutos
-                        //b.CommandTimeout(120);
-                        //b.EnableRetryOnFailure(5);
-                    });
-
-            });
-
+            // Registrar os repositórios usando factory para garantir que recebam a conexão corretamente
+            services.AddTransient<ICatalogoFind>(provider => 
+                new CatalogoFind(provider.GetRequiredService<CatalogoDBConnection>()));
+                
+            services.AddTransient<ICatalogoCreate>(provider => 
+                new CatalogoCreate(provider.GetRequiredService<CatalogoDBConnection>()));
+                
+            services.AddTransient<ICatalogoChange>(provider => 
+                new CatalogoChange(provider.GetRequiredService<CatalogoDBConnection>()));
+                
+            services.AddTransient<ICatalogoDelete>(provider => 
+                new CatalogoDelete(provider.GetRequiredService<CatalogoDBConnection>()));
         }
     }
 }

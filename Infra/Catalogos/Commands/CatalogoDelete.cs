@@ -1,26 +1,25 @@
-﻿using Domain.Catalogos.Services;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Dapper;
+using Domain.Catalogos.Services;
 using System.Threading.Tasks;
 
 namespace Infra.Catalogos.Commands
 {
     public class CatalogoDelete : ICatalogoDelete
     {
-        private readonly CatalogoDBContext _context;
-        public CatalogoDelete(CatalogoDBContext context)
+        private readonly CatalogoDBConnection _connection;
+        
+        public CatalogoDelete(CatalogoDBConnection connection)
         {
-            _context = context;
+            _connection = connection;
         }
 
         public async Task<int> Delete(int id)
         {
-
-            this._context.Catalogo.AsNoTracking().Where(x => x.id == id).ExecuteDelete();
-
+            var query = "DELETE FROM Catalogo WHERE id = @Id";
+            var parameters = new { Id = id };
+            
+            await _connection.GetConnection().ExecuteAsync(query, parameters);
+            
             return id;
         }
     }

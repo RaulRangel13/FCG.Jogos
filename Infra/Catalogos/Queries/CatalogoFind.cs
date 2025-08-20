@@ -1,60 +1,59 @@
-﻿using Domain.Catalogos.DTO;
+﻿using Dapper;
+using Domain.Catalogos.DTO;
+using Domain.Catalogos.Entities;
 using Domain.Catalogos.Filters;
 using Domain.Catalogos.Services;
-using Microsoft.EntityFrameworkCore;
+using System.Data;
 using UTIL.Extensions;
 
 namespace Infra.Catalogos.Queries
 {
     public class CatalogoFind : ICatalogoFind
     {
-        private readonly CatalogoDBContext _context;
+        private readonly CatalogoDBConnection _connection;
 
-        public CatalogoFind(CatalogoDBContext context)
+        public CatalogoFind(CatalogoDBConnection connection)
         {
-            _context = context;
+            _connection = connection;
         }
 
         public async Task<Domain.Catalogos.Entities.Catalogo> FindById(int id)
         {
-
-            var result = await this._context.Catalogo.AsNoTracking().FirstOrDefaultAsync(x => x.id == id);
+            var query = "SELECT id, name, description, created_at, alter_at FROM Catalogo WHERE id = @Id";
+            
+            var parameters = new { Id = id };
+            
+            var result = await _connection.GetConnection().QueryFirstOrDefaultAsync<Catalogo>(query, parameters);
 
             return result;
-
         }
 
         public async Task<List<CatalogoDTO>> FindAll(CatalogoFilter filter)
         {
-
-            var query = from item in this._context.Catalogo select item;
-
             filter = filter.getTrimStringProperties();
+
+            var query = "SELECT id, name, description, created_at, alter_at FROM Catalogo WHERE 1=1";
+            var parameters = new DynamicParameters();
 
             if (!string.IsNullOrEmpty(filter.searchValue))
             {
-
-                query = query.Where(x =>
-                    EF.Functions.ILike(x.description, $"%{filter.searchValue}%") ||
-                    EF.Functions.ILike(x.name, $"%{filter.searchValue}%") 
-                );
-
+                query += " AND (description ILIKE @SearchValue OR name ILIKE @SearchValue)";
+                parameters.Add("SearchValue", $"%{filter.searchValue}%");
             }
 
-            var result = await query.AsNoTracking().Select(x => new CatalogoDTO
-            {
-                id = x.id,
-                name = x.name,
-                description = x.description,
-                created_at = x.created_at,
-                alter_at = x.alter_at
-            }).ToListAsync();
+            var result = await _connection.GetConnection().QueryAsync<CatalogoDTO>(query, parameters);
 
-            return result;
-
+            return result.ToList();
         }
 
-        public async Task<bool> FindAnyByFilter(CatalogoFilter filter) => await this._context.Catalogo.AsNoTracking().AnyAsync(x => x.id == filter.id);
-
+        public async Task<bool> FindAnyByFilter(CatalogoFilter filter)
+        {
+            var query = "SELECT COUNT(1) FROM Catalogo WHERE id = @Id";
+            var parameters = new { Id = filter.id };
+            
+            var count = await _connection.GetConnection().ExecuteScalarAsync<int>(query, parameters);
+            
+            return count > 0;
+        }
     }
 }

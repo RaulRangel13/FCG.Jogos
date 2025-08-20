@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿//using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra._Core
 {
-    public abstract class BaseEntityMapper<TBase> : IEntityTypeConfiguration<TBase> where TBase : class
-    {
-        public void Configure(EntityTypeBuilder<TBase> builder)
-        {
+    //public abstract class BaseEntityMapper<TBase> : IEntityTypeConfiguration<TBase> where TBase : class
+    //{
+    //    public void Configure(EntityTypeBuilder<TBase> builder)
+    //    {
 
-            setupEntity(builder);
-        }
+    //        setupEntity(builder);
+    //    }
 
-        public abstract void setupEntity(EntityTypeBuilder<TBase> builder);
-    }
+    //    public abstract void setupEntity(EntityTypeBuilder<TBase> builder);
+    //}
 }

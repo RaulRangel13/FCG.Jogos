@@ -43,9 +43,9 @@ namespace Application.Catalogos.Commands
             //Fill (se precisar)
 
             //Acionar creator
-            await this._creator.Create(command);
+            var resultCommand = await this._creator.Create(command);
 
-            result.id = command.itemCatalogo.id;
+            result.id = resultCommand.id;
 
             return result;
 

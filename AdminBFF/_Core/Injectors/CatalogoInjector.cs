@@ -15,14 +15,8 @@ namespace AdminBFF._Core.Injectors
     {
         public static void Register(IServiceCollection services)
         {
-
-            //Queries
-            services.AddTransient<ICatalogoFind, CatalogoFind>();
-
-            //Commands
-            services.AddTransient<ICatalogoCreate, CatalogoCreate>();
-            services.AddTransient<ICatalogoChange, CatalogoChange>();
-            services.AddTransient<ICatalogoDelete, CatalogoDelete>();
+            // Nota: Os repositórios (ICatalogoFind, ICatalogoCreate, etc.) agora são registrados no AppDatabase.cs
+            // para garantir que recebam a conexão do Dapper corretamente
 
             //Handlers
             //services.AddTransient<IQueryHandler<CatalogoFindOneParams, Domain.Catalogos.Entities.Catalogo>, CatalogoFindOneHandler>();
@@ -36,8 +30,6 @@ namespace AdminBFF._Core.Injectors
             services.AddKeyedTransient<ValidatorBase<Catalogo>, CatalogoNewValidator>("new");
             services.AddKeyedTransient<ValidatorBase<Catalogo>, CatalogoChangeValidator>("change");
             services.AddKeyedTransient<ValidatorBase<Catalogo>, CatalogoDeleteValidator>("delete");
-
-
         }
     }
 }

@@ -1,31 +1,40 @@
-﻿using Domain.Catalogos.Commands;
+﻿using Dapper;
+using Domain.Catalogos.Commands;
 using Domain.Catalogos.Entities;
 using Domain.Catalogos.Services;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infra.Catalogos.Commands
 {
     public class CatalogoCreate : ICatalogoCreate
     {
-        private readonly CatalogoDBContext _context;
-                public CatalogoCreate(CatalogoDBContext context)
+        private readonly CatalogoDBConnection _connection;
+        
+        public CatalogoCreate(CatalogoDBConnection connection)
         {
-            _context = context;
+            _connection = connection;
         }
 
         public async Task<Catalogo> Create(CatalogoNewCmd cmd)
         {
             cmd.itemCatalogo.created_at = DateTime.Now;
-            await this._context.Catalogo.AddAsync(cmd.itemCatalogo);
-
-            _ = await _context.SaveChangesAsync();
-
-            return cmd.itemCatalogo;
+            
+            var query = @"
+                INSERT INTO Catalogo (name, description, created_at)
+                VALUES (@Name, @Description, @CreatedAt)
+                RETURNING id, name, description, created_at, alter_at";
+            
+            var parameters = new
+            {
+                Name = cmd.itemCatalogo.name,
+                Description = cmd.itemCatalogo.description,
+                CreatedAt = cmd.itemCatalogo.created_at
+            };
+            
+            var result = await _connection.GetConnection().QueryFirstAsync<Catalogo>(query, parameters);
+            
+            return result;
         }
     }
 }
