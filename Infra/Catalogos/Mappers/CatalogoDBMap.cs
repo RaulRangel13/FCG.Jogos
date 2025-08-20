@@ -23,6 +23,9 @@ namespace Infra.Catalogos.Mappers
 
         private void setupFields(EntityTypeBuilder<Domain.Catalogos.Entities.Catalogo> builder)
         {
+            builder.Property(x => x.created_at).HasColumnName("created_at").HasColumnType("timestamp without time zone");
+            builder.Property(x => x.alter_at).HasColumnName("alter_at").HasColumnType("timestamp without time zone");
+
         }
 
         private void setupRelationships(EntityTypeBuilder<Domain.Catalogos.Entities.Catalogo> builder)

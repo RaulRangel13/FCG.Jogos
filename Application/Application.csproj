@@ -8,16 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\UTIL\UTIL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Catalogos\Commands\" />
-    <Folder Include="Catalogos\Validators\" />
   </ItemGroup>
 
 </Project>

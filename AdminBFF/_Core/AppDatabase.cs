@@ -1,6 +1,5 @@
 ﻿using Infra.Catalogos;
 using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 
 namespace AdminBFF._Core
@@ -16,7 +15,14 @@ namespace AdminBFF._Core
             services.AddDbContext<CatalogoDBContext>(options => {
 
                 options.UseNpgsql(connectionString,
-                    b => b.MigrationsAssembly(typeof(CatalogoDBContext).Assembly.FullName));
+                    b => {
+                        b.MigrationsAssembly(typeof(CatalogoDBContext).Assembly.FullName);
+                        //b.MinPoolSize(1);
+                        //b.MaxPoolSize(20);
+                        //b.ConnectionIdleLifetime(300); // 5 minutos
+                        //b.CommandTimeout(120);
+                        //b.EnableRetryOnFailure(5);
+                    });
 
             });
 

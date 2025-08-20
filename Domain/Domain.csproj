@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Catalogos\Commands\" />
-    <Folder Include="Catalogos\Filters\" />
-    <Folder Include="_Core\" />
+    <ProjectReference Include="..\UTIL\UTIL.csproj" />
   </ItemGroup>
 
 </Project>

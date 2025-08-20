@@ -25,7 +25,7 @@ namespace Application.Catalogos.Queries
     public class CatalogoFindOneParams
     {
 
-        public Guid id { get; set; }
+        public int id { get; set; }
 
     }
 }

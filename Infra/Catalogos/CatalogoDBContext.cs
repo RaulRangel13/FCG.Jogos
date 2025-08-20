@@ -22,14 +22,14 @@ namespace Infra.Catalogos
             base.OnModelCreating(modelBuilder);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            onBeforeSaveChanges();
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        //{
+        //    onBeforeSaveChanges();
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
 
-        private void onBeforeSaveChanges()
-        {
-        }
+        //private void onBeforeSaveChanges()
+        //{
+        //}
     }
 }
