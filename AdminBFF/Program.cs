@@ -1,4 +1,6 @@
 using AdminBFF._Core;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Transport;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-// Correção do erro de digitação
+// Correï¿½ï¿½o do erro de digitaï¿½ï¿½o
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -16,7 +18,7 @@ builder.Services.AddSwaggerGen(c =>
         Title = "Minha API",
         Version = "v1"
     });
-    // Outras configurações do Swagger
+    // Outras configuraï¿½ï¿½es do Swagger
 });
 
 
@@ -25,6 +27,16 @@ builder.Services.AddContext(builder.Configuration);
 
 //Services
 builder.Services.AddApplicationServices();
+
+// var userName = builder.Configuration.GetSection("ElasticsearchOption")["Username"];
+// var password = builder.Configuration.GetSection("ElasticsearchOption")["Password"];
+// var settings = new ElasticsearchClientSettings(new Uri(builder.Configuration.GetSection("ElasticsearchOption")["Url"]!)).Authentication( new BasicAuthentication(userName!,password!));
+//
+// var client= new ElasticsearchClient(settings);
+//
+// builder.Services.AddSingleton(client);
+//
+// builder.Services.AddScoped<ElasticsearchService>();
 
 var app = builder.Build();
 
