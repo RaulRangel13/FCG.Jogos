@@ -10,7 +10,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3d151a0-94ae-462f-b0fd-d1bd57507828" name="Changes" comment="" />
+    <list default="true" id="e3d151a0-94ae-462f-b0fd-d1bd57507828" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Domain/Catalogos/Enums/CategoriaEnum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FCG.Jogos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FCG.Jogos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AdminBFF/Areas/Catalogos/CatalogoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AdminBFF/Areas/Catalogos/CatalogoController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AdminBFF/Areas/Catalogos/QueryParams/CatalogoQueryParams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AdminBFF/Areas/Catalogos/QueryParams/CatalogoQueryParams.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Catalogos/Queries/CatalogoFindAllHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Catalogos/Queries/CatalogoFindAllHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Catalogos/Queries/CatalogoFindOneHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Catalogos/Queries/CatalogoFindOneHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Catalogos/Entities/Catalogo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Catalogos/Entities/Catalogo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Catalogos/Services/ICatalogoSearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Catalogos/Services/ICatalogoSearchService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infra/Catalogos/Services/ElasticsearchCatalogoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infra/Catalogos/Services/ElasticsearchCatalogoService.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,23 +51,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.AdminBFF: http.executor&quot;: &quot;Debug&quot;,
-    &quot;Docker.AdminBFF/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.AdminBFF: http.executor": "Debug",
+    "Docker.AdminBFF/Dockerfile.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/elastic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.AdminBFF: http">
     <configuration name="AdminBFF: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/AdminBFF/AdminBFF.csproj" />
@@ -147,6 +157,7 @@
       <option name="presentableId" value="Default" />
       <updated>1756381058954</updated>
       <workItem from="1756381060184" duration="24753000" />
+      <workItem from="1758635919999" duration="975000" />
     </task>
     <servers />
   </component>

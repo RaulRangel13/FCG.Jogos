@@ -2,6 +2,7 @@
 {
     public class CatalogoQueryParams
     {
+        public int idUsuario { get; set; }
         public string? searchValue { get; set; }
     }
 }

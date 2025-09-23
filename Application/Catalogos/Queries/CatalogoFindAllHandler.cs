@@ -23,10 +23,34 @@ namespace Application.Catalogos.Queries
 
         public async Task<List<CatalogoDTO>> handle(CatalogoFindAllParams query)
         {
+            // Save user history if userId is provided
+            // if (query.idUsuario > 0 && !string.IsNullOrEmpty(query.searchValue))
+            // {
+            //     // Try to parse the search value as a game ID
+            //     if (int.TryParse(query.searchValue, out int gameId))
+            //     {
+            //         try
+            //         {
+            //             await _searchService.SaveUserHistoryAsync(query.idUsuario, gameId);
+            //         }
+            //         catch (Exception ex)
+            //         {
+            //             // Log error but don't fail the request
+            //             Console.WriteLine($"Error saving user history: {ex.Message}");
+            //         }
+            //     }
+            // }
+
             // Se houver termo de busca, usa o Elasticsearch
             if (!string.IsNullOrWhiteSpace(query.searchValue))
             {
                 var resultados = await _searchService.SearchCatalogosAsync(query.searchValue);
+
+                foreach (var resultado in resultados)
+                {
+                    await _searchService.SaveUserHistoryAsync(query.idUsuario, resultado.id);
+                }
+                
                 return MapToDtoList(resultados);
             }
 
@@ -54,6 +78,7 @@ namespace Application.Catalogos.Queries
 
     public class CatalogoFindAllParams
     {
+        public int idUsuario { get; set; } 
         public string? searchValue { get; set; }
     }
 }
